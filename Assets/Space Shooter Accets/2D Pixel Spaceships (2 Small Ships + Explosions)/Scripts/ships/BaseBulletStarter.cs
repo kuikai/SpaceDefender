@@ -7,6 +7,9 @@ namespace SmallShips
 
     public class BaseBulletStarter : MonoBehaviour {
 
+
+
+        public List<AudioClip> ProjectileAudioClips;
         public GameObject bulletPrefab; 
         [Tooltip("Lest of empty child GameObjects on the ship where bullet will appear")]
         public Transform[] bulletStartPoses;
@@ -30,11 +33,20 @@ namespace SmallShips
         
         int fireIndex = 0;
 
+        MusicPlayer musicPlayer;
+
+        private void Start()
+        {
+            musicPlayer = FindObjectOfType<MusicPlayer>();
+        }
+
         void OneShot(int index)
         {
             if (IfIndexGood(index))
             {
+
                 GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletStartPoses[index].position, Quaternion.identity);
+                
                 if (bulletSortingOrder != 0)
                 {
                     bullet.GetComponent<SpriteRenderer>().sortingOrder = bulletSortingOrder;
@@ -72,7 +84,7 @@ namespace SmallShips
                 StartCoroutine(RepeateFire());
             }
         }
-    
+
         public void StopRepeatFire()
         {
             repeatFire = false;
@@ -83,10 +95,15 @@ namespace SmallShips
             if (!OneShootOnePlace)
             {
                 for (int index = 0; index < bulletStartPoses.Length; index++)
+                {
                     OneShot(index);
+                   // AudioSource.PlayClipAtPoint(ProjectileAudioClips[0], transform.position, musicPlayer.GetEffectVolumeConvertet());
+                }
             }
             else
             {
+               
+              //  AudioSource.PlayClipAtPoint(ProjectileAudioClips[0], transform.position, musicPlayer.GetEffectVolumeConvertet());
                 OneShot(0);
             }
         }
@@ -116,7 +133,6 @@ namespace SmallShips
         {
             while (repeatFireSprit)
             {
-
                 yield return new WaitForSeconds(SpritFireDelay);
             }
         }

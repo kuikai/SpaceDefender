@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5291014794033975804}
   - component: {fileID: -5516763323330415000}
   - component: {fileID: 5156312690603873321}
+  - component: {fileID: -5660082082116202878}
   m_Layer: 11
   m_Name: Enemy_Straight_Projetile
   m_TagString: Projectile
@@ -49,6 +50,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -147,3 +149,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedspine: 5.91
+--- !u!114 &-5660082082116202878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728936453619090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db18886dcc775143a007c0669725a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioClip: {fileID: 8300000, guid: e36eb4f9e6a9dfd45815e548458bed9f, type: 3}

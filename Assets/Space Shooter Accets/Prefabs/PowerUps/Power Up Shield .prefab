@@ -148,3 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: 100
+  PicUpClipSound: {fileID: 8300000, guid: 9bbb62b17982b654e8e5a81325ee1147, type: 3}

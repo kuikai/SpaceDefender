@@ -14,9 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] [Range(0, 1)] float DeathSoundVolime = 0.75f;
     [SerializeField] AudioClip HitSound;
     [SerializeField] GameObject shield;
-
     [SerializeField] float ShiledArmor = 1000;
-
 
     [Header("Projectile")]
     [SerializeField] GameObject purpleLazer;
@@ -30,12 +28,11 @@ public class Player : MonoBehaviour
     [SerializeField] Transform ProjectilStartPosition2;
     [SerializeField] Transform ProjectilStartPosition3;
 
-
     [SerializeField] float DirectionLeft = 10;
-
     [SerializeField] float Directionright = 10;
     Level level;
-     
+    levelSettings levelSettings; 
+
     Coroutine firingCorotine;
     Coroutine FiringCorotineRight;
     Coroutine FiringCorotineLeft;
@@ -46,29 +43,87 @@ public class Player : MonoBehaviour
     float yMax;
 
     public bool shiledOn = false;
-
     public float PowerUPTime;
     public bool thereShootOn = false;
-    
-    
+        
     public float ShootDirction;
-
 
     private float Tpast;
     public Sprite Test;
 
+    public bool RunningIntro = true;
+    public bool RunningoutTro = false;
+
+    GameCanvas GameCanvas;
+
+    MusicPlayer musicPlayer;
+    public bool PlayerEnd = false;
+
+    private bool BossInlevel;
+    private bool intro = true;
+
+
+    float Time2 = 0;
     void Start()
     {
-        
+        levelSettings = FindObjectOfType<levelSettings>();
+        BossInlevel = levelSettings.GetBigBossOn();
+
+        musicPlayer = FindObjectOfType<MusicPlayer>();
+        RunningoutTro = false;
+        RunningIntro = false;
+        GameCanvas = FindObjectOfType<GameCanvas>();
         Test = Resources.Load<Sprite>("Power Up");
-    
         SetUpMoveBoundaries();
     }
+
+
+    public void OutTro()
+    {
+        float step = 1 * Time.deltaTime; // calculate distance to move
+
+        float playerXPosition = transform.position.x;
+
+        if(playerXPosition > 2.7  &&  playerXPosition < 2.9)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(2.8f, 11, 0), 5 * Time.deltaTime);
+        
+            if(transform.position.y > 10.5)
+            {
+                if(BossInlevel == true)
+                {
+                    levelSettings.LoadLevel(1, 1);                
+                }
+                else
+                {
+                    levelSettings.loadNextLevel();
+                }
+            }
+        }
+        else   
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(2.8f, transform.position.y, 0), step);  
+        }
+    }
+
     // Update is called once per frame
     void Update()
-    {     
-        Move();
-        Fire(); 
+    {
+        if (PlayerEnd == false)
+        {
+            Move();
+        }
+        else
+        {
+            OutTro();
+        }
+        if (!GameCanvas.IsPausePanelActiv && Time2 > 2)
+        {
+            Fire();
+        }
+
+        Time2 += Time.deltaTime;
+
 
     }
 
@@ -76,15 +131,26 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(PowerUPTime);
         thereShootOn = false;
-               StopCoroutine(FiringCorotineLeft);
-        StopCoroutine(FiringCorotineRight);
+        if (FiringCorotineLeft != null)
+        {
+            StopCoroutine(FiringCorotineLeft);
+        }
+        if(FiringCorotineRight != null)
+        {
+            StopCoroutine(FiringCorotineRight);
+        }
+
         Debug.Log("hallooo");
     }
     public void Timer()
     {
        
     }
-
+    public void PlayerDonIntro()
+    {
+        RunningoutTro = false;
+        FindObjectOfType<EnemySpawner>().StartWaves();
+    }
     private void Fire()
     {
         if (Input.GetMouseButtonUp(0))
@@ -110,7 +176,11 @@ public class Player : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            StopCoroutine(firingCorotine);
+            if(firingCorotine != null)
+            {
+                StopCoroutine(firingCorotine);
+            }
+  
             if (thereShootOn == true)
             {
                 StopCoroutine(FiringCorotineLeft);
@@ -134,7 +204,14 @@ public class Player : MonoBehaviour
             laser.GetComponent<Projectile>().SetUp(DegreeToVector2(90), ProjectileSpeed);
 
             //laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, ProjectileSpeed);
-            AudioSource.PlayClipAtPoint(ProjectileSound, transform.position);
+
+            float EffectVolume = FindObjectOfType<MusicPlayer>().GetEffectVolume();
+            EffectVolume = EffectVolume * -1;
+            EffectVolume = EffectVolume / 40;
+            //Debug.Log("Effect Voume" +EffectVolume);
+            AudioSource.PlayClipAtPoint(ProjectileSound, transform.position,musicPlayer.GetEffectVolumeConvertet());
+            
+
             yield return new WaitForSeconds(ProjectilefiringPeriod);
         }
     }
@@ -159,7 +236,9 @@ public class Player : MonoBehaviour
             Vector3 ShootDirection = (ShootPostion.normalized + bulletdirection) - ShootPostion.normalized;
 
             laser.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90 + GetAngelFromVector(ShootDirection)));
-            AudioSource.PlayClipAtPoint(ProjectileSound, transform.position);
+
+            AudioSource.PlayClipAtPoint(ProjectileSound, transform.position, musicPlayer.GetEffectVolumeConvertet());
+
             yield return new WaitForSeconds(ProjectilefiringPeriod);
         }
     }
@@ -176,15 +255,15 @@ public class Player : MonoBehaviour
             laser.GetComponent<Projectile>().shootPostion = ShootPostion;
             laser.GetComponent<Projectile>().speed = ProjectileSpeed;
             laser.GetComponent<Projectile>().SetUp(DegreeToVector2(Directionright), ProjectileSpeed);
-            Debug.Log(laser.GetComponent<Rigidbody2D>().velocity);
-            Debug.Log(DegreeToVector2(Directionright));
+        //    Debug.Log(laser.GetComponent<Rigidbody2D>().velocity);
+           // Debug.Log(DegreeToVector2(Directionright));
             Vector3 bulletdirection = DegreeToVector2(Directionright);
             
             Vector3 ShootDirection = (ShootPostion.normalized +bulletdirection ) - ShootPostion.normalized ;
    
             laser.transform.rotation = Quaternion.Euler(new Vector3(0, 0,-90+ GetAngelFromVector(ShootDirection)));
 
-            AudioSource.PlayClipAtPoint(ProjectileSound, transform.position);
+            AudioSource.PlayClipAtPoint(ProjectileSound, transform.position, musicPlayer.GetEffectVolumeConvertet());
 
             yield return new WaitForSeconds(ProjectilefiringPeriod);
         }
@@ -210,7 +289,6 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(newXPos, transform.position.y);
         transform.position = new Vector2(transform.position.x, newYPos);
     }
-
     private void SetUpMoveBoundaries()
     {
         Camera gameCamera = Camera.main;
@@ -221,7 +299,6 @@ public class Player : MonoBehaviour
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - topPaddingY;
 
     }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         CheackForSheildPowerUP(other);
@@ -233,8 +310,11 @@ public class Player : MonoBehaviour
             switch (powerUP.Name)
             {
                 case "3Shooter":
+                    AudioSource.PlayClipAtPoint(other.GetComponent<PowerUP>().PowerUPicUpSound, Camera.main.transform.position, musicPlayer.GetEffectVolumeConvertet());
                     if (Input.GetMouseButton(0))
                     {
+
+
                         if (thereShootOn == false)
                         {
                             FiringCorotineLeft = StartCoroutine(FireContinuouslyLeft());
@@ -247,10 +327,22 @@ public class Player : MonoBehaviour
                     Destroy(other.gameObject);
                     break;
 
+                case "HealthPack":
+                    AudioSource.PlayClipAtPoint(other.GetComponent<PowerUP>().PowerUPicUpSound, Camera.main.transform.position, musicPlayer.GetEffectVolumeConvertet());
+
+                    if (health >= 200)
+                    {
+                        health = 300;
+                    }
+                    else
+                    {
+                        health += other.GetComponent<PowerUP>().Health;
+                    }
+                    FindObjectOfType<HealthDisplay>().Setheath();
+                    Destroy(other.gameObject);
+                    break;
             }
-
         }
-
 
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
         if (!damageDealer) { return; }
@@ -264,6 +356,8 @@ public class Player : MonoBehaviour
 
         if (PowerUpShields)
         {
+            AudioSource.PlayClipAtPoint(other.GetComponent<ShieldPower>().PicUpClipSound, Camera.main.transform.position, musicPlayer.GetEffectVolumeConvertet());
+
             shiledOn = true;
             ShiledArmor = PowerUpShields.shield;
             Debug.Log("Set Shield active");
@@ -286,8 +380,7 @@ public class Player : MonoBehaviour
             {
                 FindObjectOfType<HealthDisplay>().SetHealth(0);
             }
-        }else
-        {
+        }else{
             ShiledArmor -= damageDealer.GetDamage();
             if (ShiledArmor <= 0)
             {
@@ -296,12 +389,22 @@ public class Player : MonoBehaviour
             }
         }
 
-        AudioSource.PlayClipAtPoint(HitSound, Camera.main.transform.position, DeathSoundVolime);
+   
+        AudioSource.PlayClipAtPoint(HitSound, Camera.main.transform.position, musicPlayer.GetEffectVolumeConvertet());
+      
+        /*
+        AudioSource hitsound = new AudioSource();
+        hitsound.clip = HitSound;
+        hitsound
+        hitsound.Play();
+    */
         damageDealer.Hit();
+       
         if (health <= 0)
         {
             Die();
         }
+
     }
 
     public int Gethealth()
@@ -310,7 +413,8 @@ public class Player : MonoBehaviour
     }
     private void Die()
     {
-        AudioSource.PlayClipAtPoint(PLayerDeath,Camera.main.transform.position, DeathSoundVolime);
+       
+        AudioSource.PlayClipAtPoint(PLayerDeath,Camera.main.transform.position,musicPlayer.GetEffectVolumeConvertet());
         Instantiate(PlayerExplotion, transform.position, Quaternion.identity);
         FindObjectOfType<Level>().startWaitGameOver();
         Destroy(gameObject);       

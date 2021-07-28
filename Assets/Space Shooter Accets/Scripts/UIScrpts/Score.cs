@@ -6,47 +6,25 @@ using UnityEngine.SceneManagement;
 public class Score : MonoBehaviour
 {
     // Start is called before the first frame update
-   
+    TextMeshProUGUI scoreText;
 
-
-     TextMeshProUGUI scoreText;
-      GameSession gameSession;
-
- 
     void Start()
     {
-     
         scoreText = GetComponent<TextMeshProUGUI>();
-
-        gameSession = FindObjectOfType<GameSession>();
-       
+        SetScore(FindObjectOfType<GameSession>().CorrentScore);
+        HighScore.AddScore(FindObjectOfType<GameSession>().CorrentScore);
     }
-
-    public void Update()
-    {
-        scoreText.text = gameSession.GetScore().ToString();
-     //   Debug.Log(gameSession.CorrentScore);
-    }
+    
 
     public void ResetScore()
     {
-       
+        scoreText.text = "0";
 
+    }
+    public void SetScore(int score)
+    {
+
+        scoreText.text = score.ToString();
     }
   
-    public void setScoreTo0()
-    {
-        scoreText.text = "0";
-    }
-
-    // Update is called once per frame
-    public void AddToScore()
-    {
-    
-    }
-
-    public void GameOverScoreShow()
-    {
-
-    }
 }

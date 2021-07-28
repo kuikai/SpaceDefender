@@ -10,7 +10,7 @@ public class BigBomeProjectile : MonoBehaviour
     [SerializeField] float ExplotionProjectileSpeed = 10;
     [SerializeField] GameObject ExplotionProjectile;
     // Start is called before the first frame update
-
+    [SerializeField] AudioClip ProjectileSound;
     private float counter = 0;
     void Start()
     {
@@ -55,8 +55,7 @@ public class BigBomeProjectile : MonoBehaviour
             Projectil.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90 + GetAngelFromVector(ShootDirection)));
            
             
-            // AudioSource.PlayClipAtPoint(ProjectileSound, transform.position);
-           
+             AudioSource.PlayClipAtPoint(ProjectileSound, transform.position, MusicPlayer.GetVolume());           
             
             currentShootingDrectiom += degreesBetweenEachShoot;
         }

@@ -11,6 +11,7 @@ public class BossAi : MonoBehaviour
 
     public List<Transform> IntoWaypoints;
     public List<Transform> WaypoinysLoob;
+    public List<AudioClip> ProjectileAudioClips;
     public List<GameObject> Projectiles;
     [SerializeField] float Health = 100;
     [SerializeField] float speed = 100;
@@ -18,6 +19,11 @@ public class BossAi : MonoBehaviour
     [SerializeField] float TimeBetweenChangingFiringSequncen;
     [SerializeField] float AmoutFiringSequicen;
     [SerializeField] GameObject LazerRayHitEffect;
+    [SerializeField] int powerUpDropRate =5;
+    [SerializeField] GameObject PowerUpDrop1;
+    [SerializeField] GameObject PowerUpDrop2;
+
+    [SerializeField] AudioClip BoosGetHitSound;
     private Animator ani;
     private BaseBulletStarter baseBulletStarter;
     private int ComingInMovementIndex = 0;
@@ -25,8 +31,12 @@ public class BossAi : MonoBehaviour
     public bool MovementReteinOn = false;
     private bool Firing = true;
     private int FiringSequnceIndex =0;
+
+    MusicPlayer musicPlayer;
+
     void Start()
     {
+        musicPlayer = FindObjectOfType<MusicPlayer>();
         ani = GetComponent<Animator>();
         baseBulletStarter = GetComponent<BaseBulletStarter>();
         baseBulletStarter.OneShootOnePlace = true;
@@ -37,6 +47,12 @@ public class BossAi : MonoBehaviour
     void Update()
     {
         MoveMent();
+    }
+
+
+    public void SetHealth(int health)
+    {
+        Health = health;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -55,12 +71,33 @@ public class BossAi : MonoBehaviour
         {
             Die();
         }
+
+        if (UnityEngine.Random.Range(0, 100) < powerUpDropRate)
+        {
+            //   Debug.Log(UnityEngine.Random.Range(0, 100));
+            if (UnityEngine.Random.Range(0, 100) > 50)
+            {
+                Instantiate(PowerUpDrop1, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(PowerUpDrop2, transform.position, Quaternion.identity);
+            }
+
+        }
+
+        // hit sound 
+        AudioSource.PlayClipAtPoint(BoosGetHitSound, transform.position, musicPlayer.GetEffectVolumeConvertet());
     }
 
     private void Die()
     {
         ani.SetBool("expl", true);
+        //   FindObjectOfType<levelSettings>().LoadLevel1Scene();
+        FindObjectOfType<Player>().PlayerEnd = true;
     }
+
+ 
 
     public void MoveMent()
     {
@@ -126,23 +163,27 @@ public class BossAi : MonoBehaviour
             FiringSequnceIndex++;
             switch (FiringSequnceIndex)
             {
-                case 1:             
+                case 1:
                     baseBulletStarter.OneShootOnePlace = true;
+                    
                     break;
                 case 2:
                     baseBulletStarter.bulletPrefab = Projectiles[0];
+                   // AudioSource.PlayClipAtPoint(ProjectileAudioClips[0], transform.position, musicPlayer.GetEffectVolumeConvertet());
                     baseBulletStarter.OneShootOnePlace = false;
                     break;
                 case 3:
                     baseBulletStarter.bulletPrefab = Projectiles[1];
                     baseBulletStarter.fireInSequence = true;
                     baseBulletStarter.fireDelay = 0.3F;
+                   // AudioSource.PlayClipAtPoint(ProjectileAudioClips[1], transform.position, musicPlayer.GetEffectVolumeConvertet());
                     break;
                 case 4:
                     baseBulletStarter.bulletPrefab = Projectiles[2];
                     baseBulletStarter.fireInSequence = false;
                     baseBulletStarter.OneShootOnePlace = true;
                     baseBulletStarter.fireDelay = 3;
+                   // AudioSource.PlayClipAtPoint(ProjectileAudioClips[2], transform.position, musicPlayer.GetEffectVolumeConvertet());
                     break;
                 default:
                     break;

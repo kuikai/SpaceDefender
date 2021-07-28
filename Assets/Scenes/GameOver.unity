@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -120,25 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &34301329 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2434311614920248892, guid: 2efaea36bd14ab743a95945c1dda681a,
-    type: 3}
-  m_PrefabInstance: {fileID: 902037876}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &34301330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34301329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa32b423627c48d45b08d2c808f59288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CorrentScore: 0
 --- !u!1 &149286122
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +173,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -306,6 +289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Music Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148132912289123551, guid: 7589d6545d4fcb746808c6dd39705251,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9138121975729043931, guid: 7589d6545d4fcb746808c6dd39705251,
         type: 3}
@@ -495,6 +483,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434311614920248894, guid: 2efaea36bd14ab743a95945c1dda681a,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 2021111005}
     - target: {fileID: 2434311614920248895, guid: 2efaea36bd14ab743a95945c1dda681a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -550,11 +543,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2434311614920248894, guid: 2efaea36bd14ab743a95945c1dda681a,
-        type: 3}
-      propertyPath: scoreText
-      value: 
-      objectReference: {fileID: 2021111005}
     m_RemovedComponents:
     - {fileID: 2434311614920248894, guid: 2efaea36bd14ab743a95945c1dda681a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2efaea36bd14ab743a95945c1dda681a, type: 3}
@@ -565,11 +553,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6415946192362767455, guid: 64ba2aa95c4dccb449af8e0a750e0ea4,
-        type: 3}
-      propertyPath: m_Name
-      value: Background_stuff2
-      objectReference: {fileID: 0}
     - target: {fileID: 6415946192362767454, guid: 64ba2aa95c4dccb449af8e0a750e0ea4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -625,15 +608,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6415946193254844533, guid: 64ba2aa95c4dccb449af8e0a750e0ea4,
+    - target: {fileID: 6415946192362767455, guid: 64ba2aa95c4dccb449af8e0a750e0ea4,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.2
+      propertyPath: m_Name
+      value: Background_stuff2
       objectReference: {fileID: 0}
     - target: {fileID: 6415946193040210159, guid: 64ba2aa95c4dccb449af8e0a750e0ea4,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415946193254844533, guid: 64ba2aa95c4dccb449af8e0a750e0ea4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64ba2aa95c4dccb449af8e0a750e0ea4, type: 3}
@@ -745,6 +733,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -773,11 +762,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5933255347415378702, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
-        type: 3}
-      propertyPath: m_Name
-      value: Game Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 5933255347415378698, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -883,15 +867,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5933255348713924799, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
+    - target: {fileID: 5933255347415378702, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5933255348713924799, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 251
+      propertyPath: m_Name
+      value: Game Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5933255348713924798, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
         type: 3}
@@ -928,10 +907,25 @@ PrefabInstance:
       propertyPath: m_firstOverflowCharacterIndex
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5933255349326600270, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
+    - target: {fileID: 5933255348713924798, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_margin.x
+      value: -171.95226
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933255348713924798, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -167.50433
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933255348713924799, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933255348713924799, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 251
       objectReference: {fileID: 0}
     - target: {fileID: 5933255349326600267, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
         type: 3}
@@ -956,6 +950,11 @@ PrefabInstance:
     - target: {fileID: 5933255349326600267, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
         type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933255349326600270, guid: d9c3a4efc3e6dd645b913b7c53ce477e,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -1054,6 +1053,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1210,6 +1210,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1223,7 +1224,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294440740
+    rgba: 4294506532
   m_fontColor: {r: 0.14208792, g: 0.9716981, b: 0.9716981, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1405,6 +1406,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1703,6 +1705,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

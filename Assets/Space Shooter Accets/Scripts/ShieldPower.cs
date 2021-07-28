@@ -7,5 +7,6 @@ public class ShieldPower : MonoBehaviour
 
     public float shield = 200;
 
+    public AudioClip PicUpClipSound;
     
 }

@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position +=(Direction/50) * speed;
-        Debug.Log(GetComponent<Rigidbody2D>().velocity);
+        transform.position += ((Direction / 50) * speed) * Time.deltaTime; ;
+      //  Debug.Log(GetComponent<Rigidbody2D>().velocity);
     }
 }

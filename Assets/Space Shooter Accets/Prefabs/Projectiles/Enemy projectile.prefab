@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 162018959447419261}
   - component: {fileID: 167414532839597763}
   - component: {fileID: 4230960326918147564}
+  - component: {fileID: 159909742915693874}
   m_Layer: 11
   m_Name: Enemy projectile
   m_TagString: Projectile
@@ -48,6 +49,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -143,3 +145,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
+--- !u!114 &159909742915693874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208272235107600417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db18886dcc775143a007c0669725a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioClip: {fileID: 8300000, guid: f97957bcb081c3d4db35cf016fcd663c, type: 3}

@@ -147,3 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5a7bd579633f14482f6313a83f174d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPostion: {x: 0, y: 0, z: 0}
+  Direction: {x: 0, y: 0, z: 0}
+  speed: 22.81

@@ -8,10 +8,14 @@ public class Level : MonoBehaviour
   
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level1");    
+        FindObjectOfType<GameSession>().setScoreTo0();
      
-            FindObjectOfType<GameSession>().setScoreTo0();
-        
+    }
+
+    public void loadHighScoreScene()
+    {
+        SceneManager.LoadScene("HighScore");
     }
     public void LoadGameover()
     {
@@ -22,7 +26,8 @@ public class Level : MonoBehaviour
     public void LoadStratMenu()
     {
         SceneManager.LoadScene("StartMenu");
-        FindObjectOfType<Score>().ResetScore();
+        //  FindObjectOfType<Score>().ResetScore();
+        GameSession.ResumeGame();
     }
     public void LoadOption()
     {

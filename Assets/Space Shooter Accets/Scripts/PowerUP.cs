@@ -6,6 +6,10 @@ public class PowerUP : MonoBehaviour
 {
 
     public string Name;
+
+    public int Health;
+
+    public AudioClip PowerUPicUpSound;
     void Start()
     {
         

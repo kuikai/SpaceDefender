@@ -169,6 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeParts:
   - {fileID: 4968210356403515858}
+  - {fileID: 4968210356403515858}
+  - {fileID: 4968210356403515858}
   childrenExplosion: []
 --- !u!114 &4999370025412865332
 MonoBehaviour:
@@ -182,6 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409991c5dab7674db44a89f57ac136f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectileAudioClips:
+  - {fileID: 8300000, guid: 38d7a6515d452644fb066b6d7816ef49, type: 3}
+  - {fileID: 8300000, guid: cab1d498a4fd5fc4d9919713c4df23ca, type: 3}
+  - {fileID: 8300000, guid: e36eb4f9e6a9dfd45815e548458bed9f, type: 3}
   bulletPrefab: {fileID: 208272235107600417, guid: ce8bd91446ceafe45861c43a16d87c3f,
     type: 3}
   bulletStartPoses:
@@ -215,17 +221,24 @@ MonoBehaviour:
   WaypoinysLoob:
   - {fileID: 4968804485170059695}
   - {fileID: 4968804483578723789}
+  ProjectileAudioClips: []
   Projectiles:
   - {fileID: 208272235107600417, guid: ce8bd91446ceafe45861c43a16d87c3f, type: 3}
   - {fileID: 1877740161113332, guid: d17799e01588538449a360ded5bd038c, type: 3}
   - {fileID: 1801598795324066704, guid: 356e08b660ec6414d88eb616f512aafc, type: 3}
-  Health: 30000
+  Health: 10000
   speed: 2
   VFXDeathTime: 5.98
   TimeBetweenChangingFiringSequncen: 4
   AmoutFiringSequicen: 4
   LazerRayHitEffect: {fileID: 1256001557233130, guid: 2dd0bdb7830e6644da169b32252dca96,
     type: 3}
+  powerUpDropRate: 5
+  PowerUpDrop1: {fileID: 3777784858896577134, guid: c6347a8a236567e438e4ba52d5bbb9af,
+    type: 3}
+  PowerUpDrop2: {fileID: 2981197093933343817, guid: f58e9f11e2786e8418e75b33725fc935,
+    type: 3}
+  BoosGetHitSound: {fileID: 8300000, guid: f977cef5d2a71934baa56f22eb89e407, type: 3}
   MovementReteinOn: 0
 --- !u!1 &4968101726691545346
 GameObject:

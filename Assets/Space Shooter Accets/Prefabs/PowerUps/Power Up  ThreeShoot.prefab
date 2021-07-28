@@ -148,3 +148,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 3Shooter
+  Health: 0
+  PowerUPicUpSound: {fileID: 8300000, guid: adec6749a91aa5c45a21a0f729449b28, type: 3}

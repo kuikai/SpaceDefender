@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 50263717864067914}
   - component: {fileID: 58152121139794556}
   - component: {fileID: 4627018900645846816}
+  - component: {fileID: 4120330026479938304}
   m_Layer: 11
   m_Name: Base_Fireball
   m_TagString: Bullet
@@ -134,3 +135,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
+--- !u!114 &4120330026479938304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877740161113332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db18886dcc775143a007c0669725a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioClip: {fileID: 8300000, guid: ea1ccad3b2c82964aa3e915a007cd2aa, type: 3}

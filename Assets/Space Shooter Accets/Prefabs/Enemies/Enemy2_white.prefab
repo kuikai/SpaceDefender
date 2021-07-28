@@ -148,12 +148,15 @@ MonoBehaviour:
   VFXDeathTime: 1
   clip: {fileID: 8300000, guid: e36eb4f9e6a9dfd45815e548458bed9f, type: 3}
   DeathSound: {fileID: 8300000, guid: f977cef5d2a71934baa56f22eb89e407, type: 3}
-  DeathSoundVolime: 0.75
+  HitSound: {fileID: 8300000, guid: 06586fa108adf8043998d2039838ec50, type: 3}
+  DeathSoundVolime: 0.963
   ScoreValue: 52
   powerUpDropRate: 50
   PowerUpDrop1: {fileID: 3777784858896577134, guid: c6347a8a236567e438e4ba52d5bbb9af,
     type: 3}
   PowerUpDrop2: {fileID: 2981197093933343817, guid: f58e9f11e2786e8418e75b33725fc935,
+    type: 3}
+  PowerUpDrop3: {fileID: 382540370043345852, guid: 7a944cf13cbb8f542888642a06808b67,
     type: 3}
 --- !u!114 &4797869608260396246
 MonoBehaviour:

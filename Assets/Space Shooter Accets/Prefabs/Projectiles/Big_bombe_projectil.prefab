@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6811786696027300395}
   - component: {fileID: 5794937647646599166}
   - component: {fileID: 1801598795324066705}
+  - component: {fileID: -1249946298895125014}
   m_Layer: 11
   m_Name: Big_bombe_projectil
   m_TagString: Projectile
@@ -177,9 +178,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6596068c2a354e14e8561332ac258e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeBeforeExplotion: 2.5
+  TimeBeforeExplotion: 2
   ProjectileStartSize: {x: 0, y: 0, z: 0}
-  AmoutOfprojectilesInExpoltion: 20
-  ExplotionProjectileSpeed: 3
+  AmoutOfprojectilesInExpoltion: 15
+  ExplotionProjectileSpeed: 60
   ExplotionProjectile: {fileID: 8760197273754369458, guid: a56b0aecfe822264a947ddf0d41f92be,
     type: 3}
+  ProjectileSound: {fileID: 8300000, guid: 9bbb62b17982b654e8e5a81325ee1147, type: 3}
+--- !u!114 &-1249946298895125014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801598795324066704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db18886dcc775143a007c0669725a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioClip: {fileID: 8300000, guid: 8971858c48a117c4c9c7f60c9a471d1f, type: 3}

@@ -12,9 +12,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 349bba09eef6838449ffd385ab6feeda
+  - enabled: 1
+    path: Assets/Scenes/BossLevel.unity
+    guid: 89b44d50d79adff41a4af9e8b1e51c60
+  - enabled: 1
     path: Assets/Scenes/Options.unity
     guid: 16e4c28fd0b9df3489e75f36c1ea0cb7
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: 91e9e4ba851f91640b4ad6646d33a5d5
+  - enabled: 1
+    path: Assets/Scenes/HighScore.unity
+    guid: a89bab658bf152746a35d0beae66c354
   m_configObjects: {}
